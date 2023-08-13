@@ -26,7 +26,11 @@ namespace StudyASP.Pages.Categories
         {
             if(Category.Name == Category.DisplayOrder.ToString())
             {
-                ModelState.AddModelError(string.Empty, "The DisplayOrder must be different from Name.");
+				// Validation will display below Name input field
+				//ModelState.AddModelError("Category.Name", "The DisplayOrder must be different from Name.");
+
+				// Validation will display below DisplayOrder input field
+				ModelState.AddModelError("Category.DisplayOrder", "The DisplayOrder must be different from Name.");
             }
 
             if (ModelState.IsValid)
