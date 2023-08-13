@@ -24,10 +24,20 @@ namespace StudyASP.Pages.Categories
 
         public async Task<IActionResult> OnPost()
         {
-            await _db.Category.AddAsync(Category);
-            await _db.SaveChangesAsync();
+            if(Category.Name == Category.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError(string.Empty, "The DisplayOrder must be different from Name.");
+            }
 
-            return RedirectToPage("Index");
+            if (ModelState.IsValid)
+            {
+				await _db.Category.AddAsync(Category);
+				await _db.SaveChangesAsync();
+
+				return RedirectToPage("Index");
+			}
+
+            return Page();
         }
     }
 }
